@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Pengeluaran extends Model
 {
     use HasFactory;
+    protected $table = 'pengeluaran';
+    protected $primaryKey = ['username', 'id_jenis_pengeluaran'];
+    protected $fillable = ['nominal', 'tanggal', 'role'];
+    public $timestamps = 'false';
+
 }
