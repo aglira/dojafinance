@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\user;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -12,7 +13,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // buat form
+        if (!Auth::user()) {
+            return view('login.form');
+        }
     }
 
     /**
