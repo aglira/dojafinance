@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,17 @@ Route::post('/login',[UserController::class,'check']);
 //ROUTE LOGOUT
 // Route::get('/logout',[AuthController::class,'logout']);
 //=================
-// Route::prefix('/dashboard')
-//     ->middleware(['auth','isAdmin'])
-//     ->group(function(){
-//     Route::get('/perusahaan',[PerusahaanController::class,'index']);
-//     Route::get('/perusahaan/edit',[PerusahaanController::class,'edit']);
-//     Route::post('/perusahaan/simpan',[PerusahaanController::class,'simpan']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
+// Route::middleware(['role:pemilik, admin dan anggota'])->group(function () {
+    /* Dashboard */
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user', 'index');
+        Route::post('/user/tambah', 'store');
+        Route::post('/user/{id}/edit', 'update')->where('id', '[0-9+]');
+        Route::delete('/user/{id}/delete', 'delete')->where('id', '[0-9]+');
+    });
+// });
+            
 //     //Cabang
 //     Route::get('/cabang',[CabangController::class,'index']);
 //     Route::get('/cabang/tambah',[CabangController::class,'tambah']);
