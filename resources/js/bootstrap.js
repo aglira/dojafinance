@@ -1,5 +1,17 @@
 import 'bootstrap';
 
+//jquery
+import jQuery from 'jquery';
+window.$ = window.jQuery = jQuery;
+
+//datatables
+import DataTable from 'datatables.net';
+window.DataTable = DataTable;
+
+//sweetalert2
+import Swal from 'sweetalert2';
+window.swal = Swal;
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

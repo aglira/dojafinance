@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PemasukanController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::post('/login',[UserController::class,'check']);
 //ROUTE LOGOUT
 // Route::get('/logout',[AuthController::class,'logout']);
 //=================
+
+Route::get('/pemasukan', [PemasukanController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 // Route::middleware(['role:pemilik, admin dan anggota'])->group(function () {
     /* Dashboard */
@@ -34,6 +37,7 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::post('/user/{id}/edit', 'update')->where('id', '[0-9+]');
         Route::delete('/user/{id}/delete', 'delete')->where('id', '[0-9]+');
     });
+
 // });
             
 //     //Cabang

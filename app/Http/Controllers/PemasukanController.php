@@ -13,6 +13,10 @@ class PemasukanController extends Controller
     public function index()
     {
         //
+        $data = [
+            'pemasukan' => Pemasukan::all()
+        ];
+         return view('Pemasukan.index', $data);
     }
 
     /**
