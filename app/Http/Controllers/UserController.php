@@ -19,7 +19,7 @@ class UserController extends Controller
             'user' => User::all()
         ];
 
-        return view('login.form', $data);
+        return view('dashboard.index', $data);
     }
 
     public function check(Request $request)
