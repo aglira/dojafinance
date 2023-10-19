@@ -29,7 +29,9 @@ Route::post('/login',[UserController::class,'check']);
 
 Route::get('/pemasukan', [PemasukanController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
-// Route::middleware(['role:pemilik, admin dan anggota'])->group(function () {
+
+//Route::middleware(['role:pemilik, admin dan anggota'])->group function () {}
+   
     /* Dashboard */
     Route::controller(UserController::class)->group(function () {
         Route::get('/user', 'index');
@@ -38,20 +40,11 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::delete('/user/{id}/delete', 'delete')->where('id', '[0-9]+');
     });
 
-// });
-            
-//     //Cabang
-//     Route::get('/cabang',[CabangController::class,'index']);
-//     Route::get('/cabang/tambah',[CabangController::class,'tambah']);
-//     Route::post('/cabang/simpan',[CabangController::class,'simpan']);
-//     Route::get('/cabang/edit/{id}',[CabangController::class,'edit']);
-//     Route::delete('/cabang/hapus/{id}',[CabangController::class,'hapus']);
-//     //Barang
-//     Route::get('/barang',[BarangController::class,'index']);
-//     Route::get('/barang/tambah',[BarangController::class,'tambah']);
-//     Route::post('/barang/simpan',[BarangController::class,'simpan']);
-//     Route::get('/barang/edit/{id}',[BarangController::class,'edit']);
-//     Route::delete('/barang/hapus/{id}',[BarangController::class,'hapus']);
-//     }
-
-//);
+    /*Pemasukan*/
+        /* Jenis Surat */
+        Route::controller(PemasukanController::class)->group(function () {
+            Route::get('/pemasukan', 'index');
+            Route::post('/pemasukan/tambah', 'store');
+            Route::post('/pemasukan/{id}/edit', 'store');
+            Route::delete('/pemasukan/{id}/delete', 'delete');
+        });

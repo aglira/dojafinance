@@ -8,47 +8,11 @@
 
     <link rel="stlesheet" href="/fontawesome-free-6.2.1-web/css/all.css">
 
-</head>
-<body>
-    <div class="nav container-fluid">
-        <div class="row flex-nowrap">
-            <div class="background col-auto col-md-4 min-vh-100">
-                <div class="background">
-                    <a class="d-flex text-decoration-none text-white">
-                        <img src={{('logo2.png')}} style="width: 83px; height: 83px;">
-                        <span class="fs-4 d-none d-sm-inline align-items-center">Doja Finance</span>
-                    </a>
-                    <ul class="nav nav-pills flex-coloumn mt -4">
-                        <li class="nav-item">
-                            <a href="{{ url('dashboard', []) }}" class="nav-link text-white">
-                                <img src="home.svg" style="width: 27px; height: 30px; color:#d1b3b3"><span class="fs-4 ms-3  d-none d-sm-inline">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('pemasukan', []) }}" class="nav-link text-white">
-                                <img src={{('pemasukan.png')}} style="width: 27px; height: 30px;"></i><span class="fs-4 ms-3 d-none d-sm-inline">Pemasukan</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link text-white">
-                                <img src={{('pengeluaran.png')}} style="width: 27px; height: 30px;"><span class="fs-4 ms-3 d-none d-sm-inline">Pengeluaran</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link text-white">
-                                <img src={{('anggota.png')}} style="width: 27px; height: 30px;"><span class="fs-4 ms-3 d-none d-sm-inline">Data Anggota</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-    <script src="./Bootstrap/js/bootstrap.bundle.js"></script>
+ <script src="./Bootstrap/js/bootstrap.bundle.js"></script>
     <style>
       body {
         background-color: #48D1CC;
+        table-layout: fixed
       }
     .background{
         background-color: #E9967A;
@@ -60,7 +24,7 @@
     
     <div class="container content">
       @yield('content')
-    </div>
 
-  </body>
-</html>
+</div>
+</head>
+      
