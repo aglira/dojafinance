@@ -88,4 +88,22 @@ class UserController extends Controller
         endif;
         return response()->json($pesan);
     }
+
+    public function simpan(Request $request){
+        $data = $request->validate([
+            'username' => 'required',
+            'level' => 'required',
+            'password' => 'required',
+        ]);
+
+    if ($data):
+        
+    if($data){
+        $data->storePubliclyAs('', 'public');
+    }
+        return redirect('/user')->with('succes', 'Data pemasukan berhasil ditambah');
+    else:
+        return redirect('/user/tambah')->with('error', 'Data pemasukan gagal ditambah');
+    endif;
+    }
 }

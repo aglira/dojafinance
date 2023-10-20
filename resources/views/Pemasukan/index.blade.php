@@ -16,6 +16,9 @@
                 <div class="col float-end text-end ml-5">
                     <a href="{{ url('pemasukan',['tambah']) }}" class="btn btn-success">Tambah</a>
                 </div>
+                <td class="col float-end text-end ml-5">
+                    <button class="hapusBtn btn btn-danger">Hapus</button>
+                </td>
             </div>
             <div class="card-body">
                 <table class="table  table-bordered DataTable">

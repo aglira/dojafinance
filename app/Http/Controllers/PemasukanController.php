@@ -17,6 +17,10 @@ class PemasukanController extends Controller
         return view('pemasukan.index', $data);
     }
 
+    public function tambah(){
+        return view('pemasukan.tambah');
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate([

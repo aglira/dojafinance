@@ -41,10 +41,10 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
     });
 
     /*Pemasukan*/
-        /* Jenis Surat */
         Route::controller(PemasukanController::class)->group(function () {
             Route::get('/pemasukan', 'index');
             Route::post('/pemasukan/tambah', 'store');
+            Route::get('/pemasukan/tambah', 'tambah');
             Route::post('/pemasukan/{id}/edit', 'store');
             Route::delete('/pemasukan/{id}/delete', 'delete');
         });
