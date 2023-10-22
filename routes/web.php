@@ -33,18 +33,25 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 //Route::middleware(['role:pemilik, admin dan anggota'])->group function () {}
    
     /* Dashboard */
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/user', 'index');
-        Route::post('/user/tambah', 'store');
-        Route::post('/user/{id}/edit', 'update')->where('id', '[0-9+]');
-        Route::delete('/user/{id}/delete', 'delete')->where('id', '[0-9]+');
-    });
+    // Route::controller(UserController::class)->group(function () {
+    //     Route::get('/user', 'index');
+    //     Route::post('/user/tambah', 'store');
+    //     Route::post('/user/{id}/edit', 'update')->where('id', '[0-9+]');
+    //     Route::delete('/user/{id}/delete', 'delete')->where('id', '[0-9]+');
+    // });
 
     /*Pemasukan*/
-        Route::controller(PemasukanController::class)->group(function () {
-            Route::get('/pemasukan', 'index');
-            Route::post('/pemasukan/tambah', 'store');
-            Route::get('/pemasukan/tambah', 'tambah');
-            Route::post('/pemasukan/{id}/edit', 'store');
-            Route::delete('/pemasukan/{id}/delete', 'delete');
-        });
+    Route::get('/pemasukan',[PemasukanController::class,'index']);
+         Route::get('/pemasukan/tambah',[PemasukanController::class,'tambah']);
+         Route::post('/pemasukan/simpan',[PemasukanController::class,'simpan']);
+         Route::get('/pemasukan/edit/{id}',[PemasukanController::class,'edit']);
+         Route::delete('/pemasukan/hapus/{id}',[PemasukanController::class,'hapus']);
+
+    /*User*/
+    Route::get('/user', [UserController::class, 'index']);
+         Route::get('/user/tambah', [UserController::class, 'tambah']);
+         Route::post('/user/simpan', [UserController::class, 'simpan']);
+         Route::get('/user/detail/{id}', [UserController::class, 'detail']);
+        Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
+         Route::get('/user/edit/{id}', [UserController::class, 'edit']);
+        Route::post('/user/update/{id}', [UserController::class,'update']);

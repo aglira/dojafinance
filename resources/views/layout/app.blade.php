@@ -1,33 +1,3 @@
-{{-- <!DOCTYPE html>
-<html>
-
-<head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- Option 1: Include in HTML -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <link rel="stlesheet" href="/fontawesome-free-6.2.1-web/css/all.css">
-
- <script src="./Bootstrap/js/bootstrap.bundle.js"></script>
-    <style>
-      body {
-        background-color: #48D1CC;
-        table-layout: fixed
-      }
-    .background{
-        background-color: #E9967A;
-    }
-    .nav-pills li a:hover{
-        background-color: #;
-    }
-    </style>
-    
-    <div class="container content">
-      @yield('content')
-
-</div>
-</head> --}}
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
@@ -166,13 +136,13 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="{{ url('log', []) }}" class="nav-link active" aria-current="page">
+          <a href="{{ url('user', []) }}" class="nav-link active" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-            Log
+            User
           </a>
         </li>
         <li>
-          <a href="{{ url('log', []) }}" class="nav-link text-white">
+          <a href="{{ url('dashboard', []) }}" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
             Dashboard
           </a>

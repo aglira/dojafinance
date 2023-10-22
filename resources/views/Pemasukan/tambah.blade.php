@@ -1,42 +1,70 @@
 @extends('layout.app')
 @section('content')
-<div class="row">
-    <div class="col">
-        <a href="/pemasukan" class="btn btn-primary m-2"><i class="bi-arrow-left-circle me-2"></i>Kembali</a>
-    </div>
-</div>
-<div class="row">
-    <div class="col-6">
-        <div class="card mb-4">
-            <div class="card-header">
-                <h3>Tambah Pemasukan</h3>
-            </div>
-            <div class="card-body">
-                <form action="{{ url('pemasukan',['simpan']) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                <div class="form-group col">
-                    <label for="tanggal">Tanggal</label>
-                    <input id="tanggal" type="date" class="form-control" name="tanggal_pemasukan">
-                </div>
-                <div class="form-group col">
-                    <label for="nama_anggota">Nama Anggota</label>
-                    <input id="nama_anggota" type="text" class="form-control" name="nama_anggota">
-                </div>
-                <div class="form-group col">
-                    <label for="nominal">Nominal</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Rp</span>
-                        <input type="number" class="form-control" id="nominal" aria-label="Amount" name="nominal">
-                        <span class="input-group-text">,00</span>
+    <div class="row">
+        
+        <div class="card">
+            <h1>Data Pemasukan</h1>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group col-md-4" style="max-width: 300px; border-right: none;">
+                        <input  class="form-control py-2 border-right-0 border" type="search" placeholder="search" id="example-search-input">
+                        <span class="input-group-append">
+                            <div style="border-left: none;" class="input-group-text py-2 border-left-0 bg-transparent"><i class="bi-search"></i></div>
+                        </span>
                     </div>
                 </div>
-                <div class="form-group col">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="col float-end text-end ml-5">
+                    <a href="{{ url('pemasukan',['tambah']) }}" class="btn btn-success">Tambah</a>
                 </div>
-            </form>
-                
             </div>
+            <div class="card-body">
+                <table class="table  table-bordered DataTable">
+                    <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Nama Penerima</th>
+                          <th scope="col">Tanggal pemasukan</th>
+                          <th scope="col">Nominal</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php $x=1; ?>
+                        @foreach ($pemasukan as $p)
+                        <tr>
+                          <th scope="row">{{ $x++ }}</th>
+                          <td>{{ $p->nama_anggota }}</td>
+                          <td>{{ $p->tanggal_pemasukan }}</td>
+                          <td>{{ $p->nominal }}</td>
+                          <td>
+                            <a href="{{ url('/pemasukan',['detail', $p->id_pemasukan]) }}"><i class="bi-eye"></i></a>
+                            {{-- tombol hapus --}}
+                            <a href="{{ url('/pemasukan',['hapus', $p->id_pemasukan]) }}" onclick="confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="bi-trash"></i></a>
+
+                            {{-- <a href=""><i class="bi-pencil-square"></i></a> --}}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+<script type="module">
+    $(document).on('click', '.hapusButton', function (e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    Swal({
+            title: "Are you sure!",
+            type: "error",
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes!",
+            showCancelButton: true,
+        })        
+            });
+
+</script>
 @endsection

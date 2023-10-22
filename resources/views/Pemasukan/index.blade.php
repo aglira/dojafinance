@@ -1,73 +1,100 @@
 @extends('layout.app')
+@section('title','Pemasukan')
 @section('content')
+<div class="container">
     <div class="row">
-        
         <div class="card">
-            <h1>Pemasukan</h1>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group col-md-4" style="max-width: 300px; border-right: none;">
-                        <input  class="form-control py-2 border-right-0 border" type="search" placeholder="search" id="example-search-input">
-                        <span class="input-group-append">
-                            <div style="border-left: none;" class="input-group-text py-2 border-left-0 bg-transparent"><i class="bi-search"></i></div>
-                        </span>
-                    </div>
-                </div>
-                <div class="col float-end text-end ml-5">
-                    <a href="{{ url('pemasukan',['tambah']) }}" class="btn btn-success">Tambah</a>
-                </div>
-                <td class="col float-end text-end ml-5">
-                    <button class="hapusBtn btn btn-danger">Hapus</button>
-                </td>
+            <div class="card-header">
+                <span class="h2">Pemasukan DojaFinance</span>
             </div>
             <div class="card-body">
-                <table class="table  table-bordered DataTable">
+                <table class="table table-hovered table-bordered DataTable">
                     <thead>
                         <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Tanggal Pembayaran</th>
-                          <th scope="col">Nama Anggota</th>
-                          <th scope="col">Nominal</th>
-                          <th scope="col">Action</th>
+                            <th>
+                                NO
+                            </th>
+                            <th>
+                                Nama Anggota
+                            </th>
+                            <th>
+                                Tanggal
+                            </th>
+                            <th>
+                                Nominal
+                            </th>
+                            <th>
+                                Aksi
+                            </th>
                         </tr>
-                      </thead>
-                      <tbody>
-                        <?php $x=1; ?>
-                        @foreach ($pemasukan as $p)
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $no = 1;
+                        ?>
+                        @foreach($pemasukan as $p)
                         <tr>
-                          <th scope="row">{{ $x++ }}</th>
-                          <td>{{ $p->tanggal_pemasukan }}</td>
-                          <td>{{ $p->nama_anggota }}</td>
-                          <td>{{ $p->nominal }}</td>
-                          <td>
-                            <a href="{{ url('/pemasukan',['detail', $p->id_pemasukan]) }}"><i class="bi-eye"></i></a>
-                            {{-- tombol hapus --}}
-                            <a href="{{ url('/pemasukan',['hapus', $p->id_pemasukan]) }}" onclick="confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="bi-trash"></i></a>
+                            <td>{{$no++}}</td>
+                            <td>{{$p->nama_anggota}}</td>
+                            <td>{{$p->tanggal}}</td>
+                            <td>{{$p->pemasukan}}</td>
+                            <td>{{$p->penanggung_jawab}}</td>
 
-                            <a href=""><i class="bi-pencil-square"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            <td>
+                                <a href="/pemasukan/detail/{{$p->id_pemasukan}}">
+                                    <btn class="btn btn-primary">Detail</btn>
+                                </a>
+                                <btn class="hapusBtn btn btn-danger" idPemasukan="{{$p->id_pemasukan}}">Hapus</btn>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url('pemasukan',['tambah']) }}"><btn class="btn btn-success">Tambah</btn></a>
+            </div>
         </div>
     </div>
 </div>
 @endsection
-
 @section('footer')
 <script type="module">
-    $(document).on('click', '.hapusButton', function (e) {
-    e.preventDefault();
-    var id = $(this).data('id');
-    Swal({
-            title: "Are you sure?",
-            type: "error",
-            confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes!",
+$('.DataTable tbody').on('click','.hapusBtn',function(a){
+    a.preventDefault();
+    let idPemasukan= $(this).closest('.hapusBtn').attr('idPemasukan');
+    swal.fire({
+            title : "Apakah anda ingin menghapus data ini?",
             showCancelButton: true,
-        })        
-            });
+            confirmButtonText: 'Setuju',
+            cancelButtonText: `Batal`,
+            confirmButtonColor: 'red'
 
+        }).then((result)=>{
+            if(result.isConfirmed){
+                //dilakukan proses hapus
+                axios.delete('pemasukan/hapus/'+idPemasukan).then(function(response){
+                    console.log(response);
+                    if(response.data.success){
+                        swal.fire('Berhasil di hapus!', '', 'success').then(function(){
+                                //Refresh Halaman
+                                location.reload();
+                            });
+                    }else{
+                        swal.fire('Gagal di hapus!', '', 'warning').then(function(){
+                                //Refresh Halaman
+                                location.reload();
+                            });
+                    }
+                }).catch(function(error){
+                    swal.fire('Data gagal di hapus!', '', 'error').then(function(){
+                                //Refresh Halaman
+                               
+                            });
+                });
+            }
+        });
+});
+$('.DataTable').DataTable();
 </script>
 @endsection
