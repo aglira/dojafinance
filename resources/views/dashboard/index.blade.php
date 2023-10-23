@@ -5,7 +5,7 @@
 {{-- <body>  --}}
       <div>
         <h1>Selamat Datang Di DojaFinance!</h1>
-        <img src="{{('karate.jpg')}}" width='500px'>
+        <img src="{{('karate.jpg')}}" width='800px'>
      <span><p>Karate Dojo Seroja adalah sebuah instansi olahraga beladiri yang berasal dari negara Jepang. Instansi ini menggunakan aliran shotokan dengan perguruan inkai. Dalam operasional sehari-hari Dojo Karate Seroja sangatlah memerlukan catatan keuangan dari pemasukan biaya perbulan dari anggota, anggaran pengeluaran untuk biaya operasional, dan data anggota.</p></span>
     </div>
 

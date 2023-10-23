@@ -2,80 +2,91 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pemasukan;
+use App\Http\Requests\PemasukanRequest;
+use App\Http\Requests\PemasukanEditRequest;
 use Illuminate\Http\JsonResponse;
+use App\Models\Pemasukan;
 use Illuminate\Http\Request;
 
 class PemasukanController extends Controller
 {
-    //
-    public function index(){
-        //Menampilkan list pemasukan
+    /**
+     * Display a listing of the resource.
+     */
+    public function index() 
+    {
         $data = [
-            'pemasukan' => Pemasukan::all()
+            // 'pemasukan'=> Pemasukan::with('jenis')->orderByDesc('tanggal_pemasukan')->get(),
+            'pemasukan'=> Pemasukan::all(),
         ];
-        return view('pemasukan.index',$data);
-    }
-    public function tambah(){
-        return view('pemasukan.tambah');
-    }
-    //Methods for tambah dan edit 
-    public function simpan(Request $request){
-        $validate = $request->validate([
-            'Nama Anggota'   => ['required'],
-            'Tanggal'   => ['required'],
-            'Nominal'        => ['required'],
-        ]);
-        
-        //Check Validasi
-        if($validate):
-            if($request->input('id_pemasukan') !== null):
-                //Update
-                $dataUpdate = Pemasukan::where('id_pemasukan',$request->input('id_pemasukan'))
-                                ->update($validate);
-                if($dataUpdate):
-                    return redirect('/dashboard/pemasukan')->with('success','Data pemasukan berhasil diupdate');
-                else:
-                    return redirect('/dashboard/tambah')->with('error','Data pemasukan Gagal diupdate');
-                endif;
-            else:
-                //Insert
-                $validate['id_pemasukan'] = 1;
-                $dataInsert = Pemasukan::create($validate);
-                if($dataInsert):
-                    return redirect('/dashboard/pemasukan')->with('success','Data pemasukan berhasil ditambah');
-                else:
-                   return redirect('/dashboard/tambah')->with('error','Data pemasukan Gagal ditambah');
-                endif;
 
-            endif;
-        endif;
+        // return $data;
+
+        return view('pemasukan.index', $data);
     }
-    public function details(Request $request){
-        //Get Id
-        $data = [
-         'pemasukan' =>   Pemasukan::where('id_pemasukan',$request->id)
-                        ->first()
-        ];
-        return view('pemasukan.detail',$data);
-    }
-    public function hapus(Pemasukan $pemasukan, Request $request){
-        $id_pemasukan = $request->id;
-        //Hapus 
-        $aksi = $pemasukan->where('id_pemasukan',$id_pemasukan)->delete();
-        if($aksi):
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+            $data = $request->validate([
+                'id_pemasukan' => 'required',
+                'id_anggota' => 'required',
+                'id_tagihan' => 'required',
+                'tanggal_pemasukan' => 'required',
+                'nominal' => 'required'
+            ]);
+            
+    
+            $pemasukan = Pemasukan::query()->create($data);
+    
+            if (!$pemasukan) {
+                // dd($data);
+                return response()->json([
+                    'message' => 'Failed create pemasukan'
+                ], 403);
+            }
+    
+            // return response()->json([
+            //     'message' => 'Pemasukan created'
+            // ], 201);
+
+            return redirect()->to('pemasukan');
+        }
+    public function delete(int $id): JsonResponse
+    {
+        $pemasukan = Pemasukan::query()->find($id)->delete();
+
+        if ($pemasukan):
             //Pesan Berhasil
             $pesan = [
-                'success'   => true,
-                'pesan'     => 'Data pemasukan berhasil dihapus'
+                'success' => true,
+                'pesan' => 'Data user berhasil dihapus'
             ];
         else:
             //Pesan Gagal
             $pesan = [
                 'success' => false,
-                'pesan'     => 'Data gagal dihapus'
+                'pesan' => 'Data gagal dihapus'
             ];
         endif;
         return response()->json($pesan);
     }
-}
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(PemasukanEditRequest $request)
+    {
+        $data = $request->validated();
+        $pemasukan = Pemasukan::query()->find($request->id);
+
+       
+        $pemasukan->fill($data)->save();
+
+        return [
+            'message' => 'Berhasil update surat!'
+        ];
+    }
+    }

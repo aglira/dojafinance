@@ -30,7 +30,7 @@
                 class="img-fluid" alt="Sample image">
             </div>
               <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form method="POST" action="/login">
+              <form action="/login" method="POST">
                 @csrf
                 <div class="divider d-flex align-items-center my-4">
                   <p class="text-center fw-bold mx-3 mb-0" style="font-size: 200%;">Doja Finance</p>

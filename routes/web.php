@@ -41,11 +41,12 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
     // });
 
     /*Pemasukan*/
-    Route::get('/pemasukan',[PemasukanController::class,'index']);
-         Route::get('/pemasukan/tambah',[PemasukanController::class,'tambah']);
-         Route::post('/pemasukan/simpan',[PemasukanController::class,'simpan']);
-         Route::get('/pemasukan/edit/{id}',[PemasukanController::class,'edit']);
-         Route::delete('/pemasukan/hapus/{id}',[PemasukanController::class,'hapus']);
+    Route::controller(PemasukanController::class)->group(function () {
+        Route::get('/pemasukan', 'index');
+        Route::post('/pemasukan/tambah', 'store');
+        Route::post('/pemasukan/{id}/edit', 'update');
+        Route::delete('/pemasukan/{id}/hapus', 'delete');
+    });
 
     /*User*/
     Route::get('/user', [UserController::class, 'index']);
