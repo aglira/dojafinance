@@ -13,15 +13,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_anggota', function (Blueprint $table) {
-            $table->char('id_anggota',5)->nullable(false)->primary();
-            $table->char('username',50)->nullable(false);
-            $table->string('nama_anggota',50);
+            $table->integer('id_anggota')->autoIncrement() ;
+            $table->char('username', 50);
+            $table->string('nama_anggota', 50);
             $table->integer('tinggi_badan');
             $table->integer('berat_badan');
             $table->text('prestasi');
-            $table->string('foto',255);
-
-            $table->foreign('username')->on('user')->references('username');
+            $table->string('foto', 255);
+        
+            $table->foreign('username')->references('username')->on('user');
         });
     }
 

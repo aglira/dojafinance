@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tagihan', function (Blueprint $table) {
-            $table->char('id_tagihan',5)->nullable(false)->primary();
-            $table->char('id_jenis_tagihan',5);
+            $table->increments('id_tagihan');
+            $table->char('id_jenis_tagihan', 5);
             $table->date('tanggal');
             $table->date('bulan');
             $table->integer('nominal');
-
-            $table->foreign('id_jenis_tagihan')->on('jenis_tagihan')->references('id_jenis_tagihan');
+        
+            $table->foreign('id_jenis_tagihan')->references('id_jenis_tagihan')->on('jenis_tagihan');
         });
     }
 

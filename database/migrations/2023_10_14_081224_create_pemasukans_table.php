@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pemasukan', function (Blueprint $table) {
-            $table->char('id_pemasukan',5)->nullable(false)->primary();
-            $table->char('id_anggota',5);
-            $table->char('id_tagihan',5);
+            $table->increments('id_pemasukan');
+            // $table->char('id_anggota', 5);
+            // $table->char('id_tagihan', 5);
             $table->date('tanggal');
-
-            $table->foreign('id_anggota')->on('data_anggota')->references('id_anggota');
-            $table->foreign('id_tagihan')->on('tagihan')->references('id_tagihan');
+        
+            // $table->foreign('id_anggota')->references('id_anggota')->on('data_anggota');
+            // $table->foreign('id_tagihan')->references('id_tagihan')->on('tagihan');
         });
     }
 

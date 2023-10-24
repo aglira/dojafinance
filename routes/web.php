@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataAnggotaController;
 use App\Http\Controllers\PemasukanController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -27,6 +28,7 @@ Route::post('/login',[UserController::class,'check']);
 // Route::get('/logout',[AuthController::class,'logout']);
 //=================
 
+Route::get('/data_anggota', [DataAnggotaController::class, 'index']);
 Route::get('/pemasukan', [PemasukanController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
@@ -44,7 +46,22 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::controller(PemasukanController::class)->group(function () {
             Route::get('/pemasukan', 'index');
             Route::post('/pemasukan/tambah', 'store');
-            Route::get('/pemasukan/tambah', 'tambah');
+            Route::post('/pemasukan/tambah', 'tambah');
             Route::post('/pemasukan/{id}/edit', 'store');
             Route::delete('/pemasukan/{id}/delete', 'delete');
-        });
+    });
+
+    // Data Anggota
+    Route::controller(DataAnggotaController::class)->group(function () {
+        Route::get('/data_anggota', 'index');
+        Route::get('/data_anggota/tambah', 'create');
+        Route::post('/data_anggota/tambah', 'store');
+        Route::get('/data_anggota/edit', 'update');
+        
+
+    });
+
+    Route::post('/data_anggota/add', [DataAnggotaController::class, 'store']);
+
+    /*Data Anggota*/ 
+

@@ -116,7 +116,7 @@
       }
 
       .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
+        --bd-violet-bg: #48D1CC;
         --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
 
         --bs-btn-font-weight: 600;
@@ -124,12 +124,12 @@
         --bs-btn-bg: var(--bd-violet-bg);
         --bs-btn-border-color: var(--bd-violet-bg);
         --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-hover-bg: #48D1CC;
+        --bs-btn-hover-border-color: #48D1CC;
         --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
         --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
+        --bs-btn-active-bg: #0c0c0c;
+        --bs-btn-active-border-color: #48D1CC;
       }
 
       .bd-mode-toggle {
@@ -148,7 +148,8 @@
         background-color: #E9967A;
     }
     .nav-pills li a:hover{
-        background-color: #;
+        background-color: #48D1CC;
+        border-radius: 20px;
     }
     </style>
 <body>
@@ -190,7 +191,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link text-white">
+          <a href="{{url('data_anggota', [])}}" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
            Data Anggota
           </a>

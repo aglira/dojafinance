@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('guest')->only('index');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->only('index');
+    // }
 
     public function index()
     {
@@ -27,20 +27,23 @@ class AuthController extends Controller
         return redirect()->to('/dashboard');
     }
 
-    public function login(UserLoginRequest $request)
-    {
-        $data = $request->validated();
+    // public function login(UserLoginRequest $request)
+    // {
+    //     $data = $request->validated();
 
-        if (Auth::attempt($data)) {
-            $request->session()->regenerate();
-            return Auth::user();
-        }
+    //     if (Auth::attempt($data)) {
+    //         $request->session()->regenerate();
+    //         return Auth::user();
+    //     }
 
-        return response()->json([
-            'errors' => [
-                'message' => 'Username or password wrong !'
-            ]
-        ], 401);
+    //     return response()->json([
+    //         'errors' => [
+    //             'message' => 'Username or password wrong !'
+    //         ]
+    //     ], 401);
+    // }
+    public function check(){
+        
     }
 
     public function logout()

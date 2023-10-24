@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DataAnggota extends Model
 {
     use HasFactory;
-    protected $table = 'data anggota';
+    protected $table = 'data_anggota';
     protected $primaryKey = 'id_anggota';
-    protected $fillable = ['username', 'nama_anggota', 'tinggi badan', 'berat badan', 'prestasi', 'foto'];
-    public $timestamps = 'false';
+    protected $fillable = ['username', 'tinggi badan', 'berat badan', 'prestasi', 'foto'];
+    public $timestamps = false;
 }
