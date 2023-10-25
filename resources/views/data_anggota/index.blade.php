@@ -40,10 +40,10 @@
                           <td>{{ $d->prestasi }}</td>
                           <td>{{ $d->foto }}</td>
                           <td>
-                            <a href="{{url('/data_anggota/edit')}}">
+                            <a href="{{ url('data_anggota',['edit']) }}">
                                 <btn class="btn btn-primary">Edit</btn>
                             </a>
-                            <a href="#">
+                            <a href="{{ url('data_anggota.detail') }}">
                                 <btn class="btn btn-warning">Detail</btn>
                             </a>
                             <btn class="hapusBtn btn btn-danger">Hapus</btn>
@@ -56,6 +56,33 @@
     </div>
 </div>
 @endsection
+
+<script type="module">
+    $(document).ready(function() {
+        $('.DataTable').DataTable();
+    });
+</script>
+
+<script type="module">
+    $(document).on('click', '.hapusBtn', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        Swal({
+            title: "Are you sure you want to delete this row?",
+            type: "error",
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes!",
+            showCancelButton: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                // Delete the row
+            } else {
+                // Do nothing
+            }
+        });
+    });
+</script>
 
 {{-- @section('footer')
 <script type="module">

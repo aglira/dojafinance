@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataAnggotaController;
+use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PemasukanController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -57,11 +58,16 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::get('/data_anggota/tambah', 'create');
         Route::post('/data_anggota/tambah', 'store');
         Route::get('/data_anggota/edit', 'update');
-        
-
     });
 
-    Route::post('/data_anggota/add', [DataAnggotaController::class, 'store']);
+    // Pengeluaran
+    Route::controller(PengeluaranController::class)->group(function () {
+     Route::get('/pengeluaran', 'index');
+     Route::post('/pengeluaran/tambah', 'store');
+     Route::post('/pengeluaran/{id}/edit', 'update');
+     Route::delete('/pengeluaran/{id}/hapus', 'delete');
+ });
 
-    /*Data Anggota*/ 
+
+    
 

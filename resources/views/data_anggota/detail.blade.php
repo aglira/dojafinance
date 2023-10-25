@@ -7,6 +7,9 @@
     <div class="card-header">
         Detail Data Anggota
     </div>
+</div>
+<a href="{{ url('data_anggota.edit', $d->id_anggota) }}" class="btn btn-primary">Edit</a>
+</div>
     <div class="card-body">
         <div class="list-group-item">
             <h5 class="mb-1">Id Anggota</h5>
@@ -24,14 +27,14 @@
             <h5 class="mb-1">Berat Badan</h5>
             <p class="mb-1">{{ $d->berat_badan }}</p>
         </div>
-        {{-- <div class="list-group-item">
+        <div class="list-group-item">
             <h5 class="mb-1">Gambar Kue</h5>
             {{ $d->gambar_anggota }}
-            @if($d->gambar_kue)
+            @if($d->gambar_anggota)
             <img src="{{ Storage::url('public/' . $d->gambar_kue) }}" alt="">
             @else
-            <p class="mb-1">null</p> --}}
-            {{-- @endif --}}
+            <p class="mb-1">null</p> 
+             @endif
         </div>
     </div>
 </div>

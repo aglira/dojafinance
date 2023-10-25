@@ -10,6 +10,6 @@ class DataAnggota extends Model
     use HasFactory;
     protected $table = 'data_anggota';
     protected $primaryKey = 'id_anggota';
-    protected $fillable = ['username', 'tinggi badan', 'berat badan', 'prestasi', 'foto'];
+    protected $fillable = ['nama_anggota','username', 'tinggi_badan', 'berat_badan', 'prestasi', 'foto'];
     public $timestamps = false;
 }

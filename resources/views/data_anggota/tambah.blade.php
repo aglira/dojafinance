@@ -9,10 +9,23 @@
                     Tambah Data Anggota 
                 </span>
             </div>
+            @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
             <div class="card-body">
                 <form method="POST" action="/data_anggota/tambah" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control" name="username" id="user" />
+                            </div>
                             <div class="form-group">
                                 <label>Nama Anggota</label>
                                 <input type="text" class="form-control" name="nama_anggota" />
@@ -50,3 +63,9 @@
     </div>
 </div>
 @endsection
+
+<script type="module">
+    $(document).ready(function() {
+        $('.DataTable').DataTable();
+    });
+</script>

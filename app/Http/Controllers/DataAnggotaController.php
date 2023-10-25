@@ -28,30 +28,33 @@ class DataAnggotaController extends Controller
 
     public function store(Request $request)
     {
+        // return view('data_anggota.tambah');
         $validate = $request->validate([
             'username'   => ['required'],
+            'data_anggota'   => ['required'],
             'tinggi_badan' => ['required'],
             'berat_badan' => ['required'],
             'prestasi' => ['required'],
-            'foto' => ['required'],
+            'foto' => 'mimes:png,jpg,jpeg,csv,txt,pdf',
         ]);
-        //  dd($validate);
+        // dd($validate);
         // Check validasi
         if ($validate) {
             // Validasi berhasil
-            if ($request->input('id_anggota') !== null) {
+            if ($request->input('username') !== null) {
                 // Update data
-                $dataUpdate = DataAnggota::where('id_anggota', $request->input('id_anggota'))
+                $dataUpdate = DataAnggota::where('username', $request->input('username'))
                                         ->update($validate);
                 if ($dataUpdate) {
                     return redirect('/dataAnggota')->with('success', 'Data anggota berhasil diupdate');
                 } else {
+                    dd($validate);
                     return redirect('/dataAnggota/tambah')->with('error', 'Data anggota gagal diupdate');
                 }
             } else {
                 // Tambah data
-                $dataAnggota = DataAnggota::create($validate);
-                if ($dataAnggota) {
+                $data_anggota = DataAnggota::create($validate);
+                if ($data_anggota) {
                     return redirect('/dataAnggota')->with('success', 'Data anggota baru berhasil disimpan');
                 } else {
                     return redirect('/dataAnggota/tambah')->with('error', 'Data anggota baru gagal disimpan');
