@@ -29,7 +29,7 @@
                                               value="{{ Auth::user()["id"] }}">
                                     @endauth --}}
                                     <label>Id Pengeluaran</label>
-                                    <input type="text" name="id_pengeluaran" id="username"
+                                    <input type="text" name="id_pengeluaran" id="IdPengeluaran"
                                         class="form-control mb-3" >
                                     <label>Username</label>
                                     <input type="text" name="username" id="username"
@@ -37,11 +37,11 @@
                                     <label>Id Jenis Pengeluaran</label>
                                     <input type="text" name="id_jenis_pengeluaran" id="IdJenisPengeluaran"
                                         class="form-control mb-3" >
-                                        <label>Nominal</label>
-                                     <input type="number" name="nominal" id="jumlahKeluar"
-                                            class="form-control mb-3">
+                                    <label>Nominal</label>
+                                    <input type="number" name="nominal" id="jumlahKeluar"
+                                        class="form-control mb-3">
                                     <label>Tanggal Pengeluaran</label>
-                                    <input type="datetime-local" name="tanggal_pengeluaran" id="tanggalKeluar"
+                                    <input type="datetime-local" name="tanggal" id="tanggalKeluar"
                                         class="form-control mb-3">
                                     <label class="d-block"></label>
                                     <div class="row d-flex align-items-center">
@@ -77,11 +77,11 @@
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>ID username</th>
-                                <th>ID jenis pengeluaran</th>
+                                <th>ID pengeluaran</th>
+                                <th>Username</th>
+                                <th>Id jenis pengeluaran</th>
                                 <th>Nominal</th>
                                 <th>Tanggal</th>
-                                <th>Disetujui</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -89,23 +89,23 @@
                             <?php   
                             $no = 1;
                         ?>
-                            @foreach($pengeluaran as $p)
-                            <tr idPengeluaran="{{$p->id}}">
+                            @foreach($pengeluaran as $pnlr)
+                            <tr idPengeluaran="{{$pnlr->id}}">
                                 <td class="col-1">{{$no++}}</td>
-                                <td class="col-4">{{$p->id_anggota }}</td>
-                                <td class="col-4">{{$p->id_tagihan}}</td>
-                                <td class="col-1">{{$p->tanggal_pengeluaran}}</td>
-                                <td class="col-2">{{$p->nominal}}</td>
+                                <td class="col-4">{{$pnlr->username}}</td>
+                                <td class="col-1">{{$pnlr->id_jenis_pengeluaran}}</td>
+                                <td class="col-2">{{$pnlr->nominal}}</td>
+                                <td class="col-2">{{$pnlr->tanggal}}</td>
                                 <td col-2>
                                     <button type="button" class="editBtn btn btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#edit-modal-{{$p->id}}" idPengeluaran="{{$p->id}}">
+                                        data-bs-target="#edit-modal-{{$pnlr->id}}" idPengeluaran="{{$pnlr->id}}">
                                         Edit
                                     </button>
                                     <button class="hapusBtn btn btn-danger">Hapus</button>
                                 </td>
                             </tr>
 
-                            <div class="modal fade" id="edit-modal-{{$p->id}}" tabindex="-1"
+                            <div class="modal fade" id="edit-modal-{{$pnlr->id}}" tabindex="-1"
                                 aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                <div class="modal-dialog modal-dialog-centered">
@@ -114,34 +114,31 @@
                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Pengeluaran</h1>
                                        </div>
                                        <div class="modal-body">
-                                           <form id="edit-pengeluaran-form-{{$p->id}}" enctype="multipart/form-data">
+                                           <form id="edit-pengeluaran-form-{{$pnlr->id}}" enctype="multipart/form-data">
                                                <div class="form-group">
                                                    {{-- @auth
                                                        <input type="hidden" name="id_user" class="d-none"
                                                               value="{{ Auth::user()["id"] }}">
                                                    @endauth --}}
-                                                   <label>Id Pengeluaran</label>
-                                                   <input type="text" name="id_pengeluaran" id="username"
-                                                       class="form-control mb-3" >
-                                                   <label>Username</label>
-                                                   <input type="text" name="username" id="username"
-                                                       class="form-control mb-3" >
-                                                   <label>Id jenis Pengeluaran</label>
-                                                   <input type="text" name="id_jenis_pengeluaran" id="IdJenisPengeluaran"
-                                                       class="form-control mb-3" >
-                                                       <label>Nominal</label>
-                                                    <input type="number" name="nominal" id="jumlahKleuar"
-                                                           class="form-control mb-3">
-                                                   <label>Tanggal Pengeluaran</label>
-                                                   <input type="datetime-local" name="tanggal_pengeluaran" id="tanggalKeluar"
-                                                       class="form-control mb-3">
-                                                    <label>Disetujui</label>
-                                                    <input type="text" name="disetujui" id="disetujui"
-                                                           class="form-control mb-3">
-                                                   <label class="d-block"></label>
-                                                   <div class="row d-flex align-items-center">
-                                                   <button type="submit">send</button>
-                                                       <div class="col-3">
+                                                    <label>Id Pengeluaran</label>
+                                                    <input type="text" name="id_pengeluaran" id="IdPengeluaran"
+                                                        class="form-control mb-3" >
+                                                    <label>Username</label>
+                                                    <input type="text" name="username" id="username"
+                                                        class="form-control mb-3" >
+                                                    <label>Id Jenis Pengeluaran</label>
+                                                    <input type="text" name="id_jenis_pengeluaran" id="IdJenisPengeluaran"
+                                                        class="form-control mb-3" >
+                                                    <label>Nominal</label>
+                                                    <input type="number" name="nominal" id="jumlahKeluar"
+                                                        class="form-control mb-3">
+                                                    <label>Tanggal Pengeluaran</label>
+                                                    <input type="datetime-local" name="tanggal" id="tanggalKeluar"
+                                                        class="form-control mb-3">
+                                                    <label class="d-block"></label>
+                                                    <div class="row d-flex align-items-center">
+                                                    <button type="submit">send</button>
+                                                        <div class="col-3">
                                                    @csrf
                                                </div>
                                            </form>
@@ -153,7 +150,7 @@
                                            </button>
                                            <button type="submit" class="btn btn-primary edit-btn"
                                                    form=
-                                                   "edit-pengeluaran-form-{{$p->id}}">
+                                                   "edit-pengeluaran-form-{{$pnlr->id}}">
                                                Edit
                                            </button>
                                        </div>
@@ -252,6 +249,6 @@
                         swal.fire('Gagal tambah data!', `${message}`, 'warning');
                     })
             })
-        }
+        })
 </script>
     @endsection

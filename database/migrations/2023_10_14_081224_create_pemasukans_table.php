@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('pemasukan', function (Blueprint $table) {
             $table->increments('id_pemasukan');
-            // $table->char('id_anggota', 5);
-            // $table->char('id_tagihan', 5);
-            $table->date('tanggal');
+            $table->string('id_anggota', 255);
+            $table->string('id_tagihan', 255);
+            $table->date('tanggal_pemasukan');
+            $table->string('nominal', 255);
         
             // $table->foreign('id_anggota')->references('id_anggota')->on('data_anggota');
             // $table->foreign('id_tagihan')->references('id_tagihan')->on('tagihan');

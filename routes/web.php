@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataAnggotaController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PemasukanController;
+use App\Http\Controllers\LoggingController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -47,8 +48,8 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
         Route::controller(PemasukanController::class)->group(function () {
             Route::get('/pemasukan', 'index');
             Route::post('/pemasukan/tambah', 'store');
-            Route::post('/pemasukan/tambah', 'tambah');
-            Route::post('/pemasukan/{id}/edit', 'store');
+            // Route::post('/pemasukan/tambah', 'tambah');
+            Route::post('/pemasukan/edit', 'store');
             Route::delete('/pemasukan/{id}/delete', 'delete');
     });
 
@@ -68,6 +69,8 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
      Route::delete('/pengeluaran/{id}/hapus', 'delete');
  });
 
-
-    
+    /* Log */
+    Route::controller(LoggingController::class)->group(function () {
+        Route::get('/log', 'index');
+    });
 

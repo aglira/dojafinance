@@ -12,11 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('log', function (Blueprint $table) {
-            $table->id();
-            $table->string('username');
-            $table->enum('action', ['INSERT', 'UPDATE', 'DELETE']);
-            $table->text('log');
-            $table->dateTime('created_at')->useCurrent();
+            $table->integer('id_log')->autoIncrement();
+            $table->text('log')->nullable(false);
+            $table->timestamps();
         });
     }
 

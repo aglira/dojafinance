@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('prestasi');
             $table->string('foto', 255);
         
-            $table->foreign('username')->references('username')->on('user');
+            $table->foreign('username')->references('username')->on('user')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

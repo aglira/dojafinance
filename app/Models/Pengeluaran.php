@@ -10,7 +10,7 @@ class Pengeluaran extends Model
     use HasFactory;
     protected $table = 'pengeluaran';
     protected $primaryKey = ['username', 'id_jenis_pengeluaran'];
-    protected $fillable = ['nominal', 'tanggal', 'role'];
+    protected $fillable = ['nominal', 'tanggal', 'enum'];
     public $timestamps = 'false';
 
 }

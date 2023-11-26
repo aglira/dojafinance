@@ -10,9 +10,13 @@ class LoggingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(log $logs)
     {
-        //
+        $data = [
+            'log' => $logs
+        ];
+
+        return view('log.index', $data);
     }
 
     /**

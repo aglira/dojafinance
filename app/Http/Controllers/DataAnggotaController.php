@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataAnggota;
+use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 
@@ -23,13 +24,12 @@ class DataAnggotaController extends Controller
      */
     public function create()
     {
-        return view('data_anggota.tambah');
+        // return view('data_anggota.tambah');
     }
 
     public function store(Request $request)
     {
-        // return view('data_anggota.tambah');
-        $validate = $request->validate([
+        $data = $request->validate([
             'username'   => ['required'],
             'data_anggota'   => ['required'],
             'tinggi_badan' => ['required'],
@@ -37,33 +37,37 @@ class DataAnggotaController extends Controller
             'prestasi' => ['required'],
             'foto' => 'mimes:png,jpg,jpeg,csv,txt,pdf',
         ]);
+
+        if($data){
+            
+        }
         // dd($validate);
         // Check validasi
-        if ($validate) {
-            // Validasi berhasil
-            if ($request->input('username') !== null) {
-                // Update data
-                $dataUpdate = DataAnggota::where('username', $request->input('username'))
-                                        ->update($validate);
-                if ($dataUpdate) {
-                    return redirect('/dataAnggota')->with('success', 'Data anggota berhasil diupdate');
-                } else {
-                    dd($validate);
-                    return redirect('/dataAnggota/tambah')->with('error', 'Data anggota gagal diupdate');
-                }
-            } else {
-                // Tambah data
-                $data_anggota = DataAnggota::create($validate);
-                if ($data_anggota) {
-                    return redirect('/dataAnggota')->with('success', 'Data anggota baru berhasil disimpan');
-                } else {
-                    return redirect('/dataAnggota/tambah')->with('error', 'Data anggota baru gagal disimpan');
-                }
-            }
-        } else {
-            // Validasi gagal
-            return redirect('/dataAnggota/tambah')->with('error', 'Data anggota gagal disimpan');
-        }
+    //     if ($data) {
+    //         // Validasi berhasil
+    //         if ($request->input('username') !== null) {
+    //             // Update data
+    //             $dataUpdate = DataAnggota::where('username', $request->input('username'))
+    //                                     ->update($data);
+    //             if ($dataUpdate) {
+    //                 return redirect('/dataAnggota')->with('success', 'Data anggota berhasil diupdate');
+    //             } else {
+    //                 // dd($data);
+    //                 return redirect('/dataAnggota/tambah')->with('error', 'Data anggota gagal diupdate');
+    //             }
+    //         } else {
+    //             // Tambah data
+    //             $data_anggota = DataAnggota::create($data);
+    //             if ($data_anggota) {
+    //                 return redirect('/dataAnggota')->with('success', 'Data anggota baru berhasil disimpan');
+    //             } else {
+    //                 return redirect('/dataAnggota/tambah')->with('error', 'Data anggota baru gagal disimpan');
+    //             }
+    //         }
+    //     } else {
+    //         // Validasi gagal
+    //         return redirect('/dataAnggota/tambah')->with('error', 'Data anggota gagal disimpan');
+    //     }
     }
 
     /**

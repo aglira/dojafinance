@@ -13,41 +13,38 @@ class PemasukanController extends Controller
         $data = [
             'pemasukan' => Pemasukan::all()
         ];
-
         return view('pemasukan.index', $data);
     }
 
-    public function tambah(){
-        return view('pemasukan.tambah');
-    }
+    // public function tambah(){
+    //     return view('pemasukan.index');
+    // }
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'pemasukan' => ['required', 'max:40']
+            'id_pemasukan' => 'required',
+            'id_anggota' => 'required',
+            'id_tagihan' => 'required',
+            'tanggal_pemasukan' => 'required',
+            'nominal' => 'required'
         ]);
 
-        if ($data) {
-            if ($request->input('id') !== null) {
-                // TODO: Update Pemasukan
-                $pemasukan = Pemasukan::query()->find($request->input('id'));
-                $pemasukan->fill($data);
-                $pemasukan->save();
-
+        $pemasukan = Pemasukan::query()->create($data);
+    
+            if (!$pemasukan) {
+                // dd($data);
                 return response()->json([
-                    'message' => 'Pemasukan berhasil diupdate!'
-                ], 200);
+                    'message' => 'Failed create pemasukan'
+                ], 403);
             }
+    
+            // return response()->json([
+            //     'message' => 'pemasukan created'
+            // ], 201);
 
-            $dataInsert = Pemasukan::create($data);
-            if ($dataInsert) {
-                return redirect()->to('/pemasukan')->with('success', 'pemasukan berhasil ditambah');
-            }
+            return redirect()->to('pemasukan');
         }
-
-        return redirect()->to('/pemasukan')->with('error', 'Gagal tambah data');
-    }
-
     public function delete(int $id): JsonResponse
     {
         $pemasukan = Pemasukan::query()->find($id)->delete();
@@ -66,5 +63,20 @@ class PemasukanController extends Controller
             ];
         endif;
         return response()->json($pesan);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(PemasukanEditRequest $request)
+    {
+        $data = $request->validated();
+        $pemasukan = Pemasukan::query()->find($request->id);
+
+        $pemasukan->fill($data)->save();
+
+        return [
+            'message' => 'Berhasil update surat!'
+        ];
     }
 }

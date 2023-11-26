@@ -7,7 +7,11 @@ import 'bootstrap';
  */
 
 import axios from 'axios';
+import Jquery from 'jquery'
+import DataTable from 'datatables.net-bs5'
 window.axios = axios;
+window.$ = window.Jquery = Jquery
+window.DataTable = DataTable
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

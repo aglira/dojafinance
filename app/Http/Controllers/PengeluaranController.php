@@ -16,9 +16,10 @@ class PengeluaranController extends Controller
     public function index() 
     {
         $data = [
-            // 'pengeluaran'=> Pengeluaran::with('jenis')->orderByDesc('tanggal_pengeluaran')->get(),
+            // 'pengeluaran'=> Pengeluaran::with('jenis')->orderByDesc('tanggal')->get(),
             'pengeluaran'=> Pengeluaran::all(),
         ];
+
         // return $data;
 
         return view('pengeluaran.index', $data);
@@ -29,27 +30,28 @@ class PengeluaranController extends Controller
      */
     public function store(Request $request)
     {
+        // return view('pengeluaran.tambah', $data);
+
             $data = $request->validate([
                 'id_pengeluaran' => 'required',
                 'username' => 'required',
-                'id_jenis_tagihan' => 'required',
-                'nominal' => 'required',
-                'tanggal_pengeluaran' => 'required',
-                'disetujui' => 'required'
+                'id_jenis_pengeluaran' => 'required',
+                'nominal' => 'required'
+                // 'tanggal' => 'required'
             ]);
             
     
-            $pengeluaran = Pengeluaran::query()->create($data);
+            $pengeluaran = Pengeluaran::query();
     
             if (!$pengeluaran) {
-                // dd($data);
+                dd($data);
                 return response()->json([
                     'message' => 'Failed create pengeluaran'
                 ], 403);
             }
     
             // return response()->json([
-            //     'message' => 'Pengeluaran created'
+            //     'message' => 'Pemasukan created'
             // ], 201);
 
             return redirect()->to('pengeluaran');
